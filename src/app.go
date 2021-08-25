@@ -172,20 +172,12 @@ func extractWeatherInfo(weatherList []Weather) ([]TemperatureOutput, []WindOutpu
 }
 
 func createCSV(name string) (*os.File, error) {
-	filename := fmt.Sprintf("Weather/%s.csv", name)
-
-	_, err := os.Open(filename)
-
-	if err != nil {
-		if err := os.Remove(filename); err != nil {
-			return nil, fmt.Errorf("failed to remove outdated file! %s", err)
-		}
-	}
+	filename := fmt.Sprintf("%s.csv", name)
 
 	file, err := os.Create(filename)
 
 	if err != nil {
-		return nil, fmt.Errorf("failed to create CSV! %s", err)
+		return nil, fmt.Errorf("%s", err)
 	}
 
 	return file, nil
